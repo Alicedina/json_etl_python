@@ -11,13 +11,74 @@ import json
 import requests
 
 import matplotlib.pyplot as plt
-
+from matplotlib.animation import FuncAnimation
 
 if __name__ == '__main__':
     print("Bienvenidos a otra clase de Inove con Python")
     
-    # Ejercicio de consumo de datos por API
+     #creo el grafico
+    data1 = []
+
+#def bar_plot():
+    usuarios = ['userId 1 - UserId 3', 'userId 4 - userId 6', 'userId 7 - UserId 9', 'userId 10']
+    libros = ['title 1', 'title 2', 'title 3', 'title 4', 'title 5', 'title 6', 'title 7', 'title 8', 'title 9', 'title 10']
+    fig = plt.figure()
+    fig.suptitle('usuarios - libros', fontsize=16)
+    ax = fig.add_subplot()
+
+    ax.bar(usuarios, libros, label='libro')
+    ax.set_facecolor('whitesmoke')
+    ax.legend()
+    plt.show()
+
     url = "https://jsonplaceholder.typicode.com/todos"
+    data1 = extract(url)
+  
+    x, y = transform(data1)
+
+    # Ejercicio de consumo de datos por API
+    
+    # def upate_animation(frame):
+
+def extract(url):
+    
+    response = requests.get(url)
+    data1 =response.json()
+    return data1
+
+def transform(data1):
+    # Transformar los datos en dos vectores
+    # para graficar
+    x = [d['usuarios'] for d in data1]
+    y =[d['titulos'] for d in data1]
+    return x, y
+
+def load(x ,y):
+        
+
+
+
+    return load (x, y)
+    
+    response = requests.get("https://jsonplaceholder.typicode.com/todos")
+    data4 = response.json()
+    #return data4
+    print('imprimo los datos traidos de la url')
+    print(json.dumps(data4, indent = 4))
+
+    for user in data4:
+        if user ['userId'] > 1:
+            break
+        print('El usuario {} completó {}? {}'.format(user['userId'],
+                                                      user['title'],
+                                                      user['completed']
+                                                      ))
+
+    # Extraer el JSON de la URL pasada
+    # como parámetro
+   # 
+    #data1 = response.json() #en response nos quedamos con todo lo similar a json
+    #nos retorna una lista de diccionario
 
     # El primer paso es que copien esa URL en su explorador web
     # y analicen los datos en general:

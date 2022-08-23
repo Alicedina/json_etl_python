@@ -12,6 +12,33 @@ import json
 
 def serializar():
     print("Funcion que genera un archivo JSON")
+
+    persona = {
+                  "nombre": "Alicia",
+                  "apellido": "Bertolli",
+                  "edad" : 40,
+                  "DNI" : 32568978,
+                  "Vestimenta":[
+                    {
+                        "prenda": "pantalones",
+                        "cantidad": 3
+                    },
+                    {
+                        "prenda": "remeras",
+                        "cantidad": 5
+
+                    }
+                  ]
+              }
+
+    json_data = {"nombre": persona}
+    print("imprimir json como objeto")
+    print(persona)
+
+    with open('mi_jsonp.json', 'w') as jsonfile:
+        data = [persona]
+        json.dump(data, jsonfile, indent = 4)
+             
     # JSON Serialize
     # Armar un JSON que represente los datos personales
     # de su persona (puede invitar los datos sino quiere exponer
@@ -35,7 +62,22 @@ def serializar():
 
 def deserializar():
     print("Funcion que lee un archivo JSON")
-    # JSON Deserialize
+
+    with open ('mi_jsonp.json', 'r') as jsonfile:
+        actual_data= json.load(jsonfile)
+
+    with open ('mi_jsonp.json', 'w') as jsonfile:
+        json.dump(actual_data, jsonfile, indent = 4)
+
+    with open('mi_jsonp.json', 'r') as jsonfile:
+        json_data = json.load(jsonfile)
+
+    print ('muestra el contenido del archivo mi_jsonp') 
+    print(json.dumps(json_data, indent = 4))   
+
+    
+    
+     # JSON Deserialize
     # Basado en la función  anterior debe abrir y leer el contenido
     # del archivo y guardarlo en un objeto JSON utilizando el método
     # load()
@@ -48,7 +90,7 @@ def deserializar():
 if __name__ == '__main__':
     print("Bienvenidos a otra clase de Inove con Python")
     
-    serializar()
-    deserializar()
+serializar()
+deserializar()
 
-    print("terminamos")
+print("terminamos")
